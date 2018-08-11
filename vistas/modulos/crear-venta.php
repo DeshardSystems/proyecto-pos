@@ -208,8 +208,6 @@ if($_SESSION["perfil"] == "Especial"){
                           <!-- <input name="radio" id="radio" type="radio" value="1" /></td>                          -->
                           <input type="radio" checked class="flat-red" name="entrega_" id="ordinario" > <label>Ordinario</label>
                           <br>
-                          <input type="radio" class="flat-red" name="entrega_"id="dia_siguiente"> <label>Dia Siguiente</label>
-                          <br>
                           <input type="radio" class="flat-red" name="entrega_"id="urgente"> <label>Urgente</label>
                           <input type="hidden" name="entrega" id="entrega">
                           </div> 
@@ -330,7 +328,8 @@ if($_SESSION["perfil"] == "Especial"){
                         <option value="Efectivo">Efectivo</option>
                         <option value="TC">Tarjeta Crédito</option>
                         <option value="TD">Tarjeta Débito</option>
-                        <option value="LC">Linea de Credito</option>                     
+                        <option value="TE">Transferencia</option> 
+                        <option value="LC">Linea de Credito</option>                                           
                       </select>    
 
                     </div>
@@ -392,10 +391,12 @@ if($_SESSION["perfil"] == "Especial"){
                 <label><input type="checkbox" class="minimal router_grabado_"> Grabado / Vector </label> 
                 <label><input type="checkbox" class="minimal router_tallado_"> Tallado B-bit </label>
                 <label><input type="checkbox" class="minimal router_diamante_"> Punta Diamante </label>
+                <label><input type="checkbox" class="minimal router_3d_"> 3D </label>
                 <input type="hidden" name="router_corte"    id="router_corte">  
                 <input type="hidden" name="router_grabado"  id="router_grabado"> 
                 <input type="hidden" name="router_tallado"  id="router_tallado"> 
                 <input type="hidden" name="router_diamante" id="router_diamante"> 
+                <input type="hidden" name="router_3d" id="router_3d"> 
                 <input type="text" class="form-control" rows="2" placeholder="Detalles" name="router_detalles" ></input>
 
                 <hr>

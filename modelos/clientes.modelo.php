@@ -10,7 +10,7 @@ class ModeloClientes{
 
 	static public function mdlIngresarCliente($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, documento, email, telefono, direccion, fecha_nacimiento, credito) VALUES (:nombre, :documento, :email, :telefono, :direccion, :fecha_nacimiento, :credito)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, documento, email, telefono, direccion, fecha_nacimiento, credito, dia_pago) VALUES (:nombre, :documento, :email, :telefono, :direccion, :fecha_nacimiento, :credito, :dia_pago)");
 
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":documento", $datos["documento"], PDO::PARAM_STR);
@@ -19,6 +19,7 @@ class ModeloClientes{
 		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
 		$stmt->bindParam(":fecha_nacimiento", $datos["fecha_nacimiento"], PDO::PARAM_STR);
 		$stmt->bindParam(":credito", $datos["credito"], PDO::PARAM_STR);
+		$stmt->bindParam(":dia_pago", $datos["dia_pago"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
 
@@ -73,7 +74,7 @@ class ModeloClientes{
 
 	static public function mdlEditarCliente($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, documento = :documento, email = :email, telefono = :telefono, direccion = :direccion, fecha_nacimiento = :fecha_nacimiento, credito = :credito WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre, documento = :documento, email = :email, telefono = :telefono, direccion = :direccion, fecha_nacimiento = :fecha_nacimiento, credito = :credito, dia_pago = :dia_pago WHERE id = :id");
 
 		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
@@ -83,6 +84,7 @@ class ModeloClientes{
 		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
 		$stmt->bindParam(":fecha_nacimiento", $datos["fecha_nacimiento"], PDO::PARAM_STR);
 		$stmt->bindParam(":credito", $datos["credito"], PDO::PARAM_STR);
+		$stmt->bindParam(":dia_pago", $datos["dia_pago"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
 

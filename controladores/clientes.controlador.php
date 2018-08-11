@@ -15,6 +15,7 @@ class ControladorClientes{
 			   preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["nuevoEmail"]) && 
 			   preg_match('/^[()\-0-9 ]+$/', $_POST["nuevoTelefono"]) && 
 			   preg_match('/^[0-9 ]+$/', $_POST["credito_"]) &&
+			   preg_match('/^[0-9 ]+$/', $_POST["nuevoDiaPago"]) &&
 			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["nuevaDireccion"])){
 
 			   	$tabla = "clientes";
@@ -25,7 +26,9 @@ class ControladorClientes{
 					           "telefono"=>$_POST["nuevoTelefono"],
 					           "direccion"=>$_POST["nuevaDireccion"],
 					           "fecha_nacimiento"=>$_POST["nuevaFechaNacimiento"],
-					       	   "credito"=>$_POST["credito_"]);
+					       	   "credito"=>$_POST["credito_"],
+					       	   "dia_pago"=>$_POST["nuevoDiaPago"],
+					       	);
 
 			   	$respuesta = ModeloClientes::mdlIngresarCliente($tabla, $datos);
 
@@ -103,7 +106,8 @@ class ControladorClientes{
 			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["editarDocumentoId"]) &&
 			   preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["editarEmail"]) && 
 			   preg_match('/^[()\-0-9 ]+$/', $_POST["editarTelefono"]) && 
-			   preg_match('/^[0-9 ]+$/', $_POST["credito_"]) &&
+			   preg_match('/^[0-9 ]+$/', $_POST["editar_credito"]) &&
+			   preg_match('/^[0-9 ]+$/', $_POST["editarDiaPago"]) &&
 			   preg_match('/^[#\.\-a-zA-Z0-9 ]+$/', $_POST["editarDireccion"])){
 
 			   	$tabla = "clientes";
@@ -115,7 +119,9 @@ class ControladorClientes{
 					           "telefono"=>$_POST["editarTelefono"],
 					           "direccion"=>$_POST["editarDireccion"],
 					           "fecha_nacimiento"=>$_POST["editarFechaNacimiento"],
-					       	   "credito"=>$_POST["credito_"]);
+					       	   "credito"=>$_POST["editar_credito"],
+					       	   "dia_pago"=>$_POST["editarDiaPago"],
+					       	);
 
 			   	$respuesta = ModeloClientes::mdlEditarCliente($tabla, $datos);
 

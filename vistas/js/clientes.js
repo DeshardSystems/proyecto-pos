@@ -18,13 +18,15 @@ $(".tablas").on("click", ".btnEditarCliente", function(){
       dataType:"json",
       success:function(respuesta){
       
-      	   $("#idCliente").val(respuesta["id"]);
+      	 $("#idCliente").val(respuesta["id"]);
 	       $("#editarCliente").val(respuesta["nombre"]);
 	       $("#editarDocumentoId").val(respuesta["documento"]);
 	       $("#editarEmail").val(respuesta["email"]);
 	       $("#editarTelefono").val(respuesta["telefono"]);
 	       $("#editarDireccion").val(respuesta["direccion"]);
-           $("#editarFechaNacimiento").val(respuesta["fecha_nacimiento"]);
+         $("#editarFechaNacimiento").val(respuesta["fecha_nacimiento"]);
+         $("#editar_credito").val(respuesta["credito"]);
+         $("#editarDiaPago").val(respuesta["dia_pago"]);
 	  }
 
   	})

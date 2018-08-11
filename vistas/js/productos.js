@@ -103,10 +103,8 @@ $("#nuevoPrecioCompra, #editarPrecioCompra").change(function(){
 		var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
 
 		$("#nuevoPrecioVenta").val(porcentaje);
-		$("#nuevoPrecioVenta").prop("readonly",true);
 
 		$("#editarPrecioVenta").val(editarPorcentaje);
-		$("#editarPrecioVenta").prop("readonly",true);
 
 	}
 
@@ -126,28 +124,26 @@ $(".nuevoPorcentaje").change(function(){
 		var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
 
 		$("#nuevoPrecioVenta").val(porcentaje);
-		$("#nuevoPrecioVenta").prop("readonly",true);
 
 		$("#editarPrecioVenta").val(editarPorcentaje);
-		$("#editarPrecioVenta").prop("readonly",true);
 
 	}
 
 })
 
-$(".porcentaje").on("ifUnchecked",function(){
+// $(".porcentaje").on("ifUnchecked",function(){
 
-	$("#nuevoPrecioVenta").prop("readonly",false);
-	$("#editarPrecioVenta").prop("readonly",false);
+// 	$("#nuevoPrecioVenta").prop("readonly",false);
+// 	$("#editarPrecioVenta").prop("readonly",false);
 
-})
+// })
 
-$(".porcentaje").on("ifChecked",function(){
+// $(".porcentaje").on("ifChecked",function(){
 
-	$("#nuevoPrecioVenta").prop("readonly",true);
-	$("#editarPrecioVenta").prop("readonly",true);
+// 	$("#nuevoPrecioVenta").prop("readonly",true);
+// 	$("#editarPrecioVenta").prop("readonly",true);
 
-})
+// })
 
 /*=============================================
 SUBIENDO LA FOTO DEL PRODUCTO

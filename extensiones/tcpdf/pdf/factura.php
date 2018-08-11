@@ -406,9 +406,24 @@ $bloque7 = <<<EOF
 EOF;
 
 $pdf->writeHTML($bloque7, false, false, false, false, '');
-// _________________________________________________________________________________
-//selecciones de orden de trabajo
 
+// _________________________________________________________________________________
+// ____________________________________________________________--ENTREGA ORDINARIA /URGENTE
+if($respuestaVenta["entrega"] == "0") {
+$bloque6 = <<<EOF
+<h4>Entrega Ordinaria</h4>
+EOF;
+$pdf->writeHTML($bloque6, false, false, false, false, '');
+}
+if($respuestaVenta["entrega"] == "1") {
+$bloque7 = <<<EOF
+<h4>Entrega URGENTE</h4>
+EOF;
+$pdf->writeHTML($bloque7, false, false, false, false, '');
+}
+// ____________________________________________________________//selecciones de orden de trabajo
+
+// ____________________________________________________________--laser
 if($respuestaVenta["laser_corte"] == "1") {
 $bloque6 = <<<EOF
 <h4>Corte Laser</h4>
@@ -427,7 +442,7 @@ $bloque8 = <<<EOF
 EOF;
 $pdf->writeHTML($bloque8, false, false, false, false, '');
 }
-// ____________________________________________________________--laser
+// ____________________________________________________________--Plasma
 if($respuestaVenta["plasma_corte"] == "1") {
 $bloque9 = <<<EOF
 <h4>Corte Plasma</h4>
@@ -440,7 +455,7 @@ $bloque10 = <<<EOF
 EOF;
 $pdf->writeHTML($bloque10, false, false, false, false, '');
 }
-// ____________________________________________________________--Plasma
+// ____________________________________________________________--Router
 if($respuestaVenta["router_corte"] == "1") {
 $bloque11 = <<<EOF
 <h4>Corte Router</h4>
@@ -465,13 +480,19 @@ $bloque14 = <<<EOF
 EOF;
 $pdf->writeHTML($bloque14, false, false, false, false, '');
 }
+if($respuestaVenta["router_3d"] == "1") {
+$bloque14 = <<<EOF
+<h4>3d Router</h4>
+EOF;
+$pdf->writeHTML($bloque14, false, false, false, false, '');
+}
 if($respuestaVenta["router_detalles"] != "") {
 $bloque15 = <<<EOF
 <h4>$respuestaVenta[router_detalles]</h4>
 EOF;
 $pdf->writeHTML($bloque15, false, false, false, false, '');
 }
-// ____________________________________________________________--Router
+// _____________________________________________________________________Acabado
 
 if($respuestaVenta["acabado"] == "0") {
 $bloque6 = <<<EOF
@@ -491,6 +512,7 @@ $bloque7 = <<<EOF
 EOF;
 $pdf->writeHTML($bloque7, false, false, false, false, '');
 }
+// ____________________________________________________________________--Material
 if($respuestaVenta["material"] == "0") {
 $bloque7 = <<<EOF
 <h4>Material aportado por el Cliente</h4>
@@ -509,20 +531,20 @@ $bloque8 = <<<EOF
 EOF;
 $pdf->writeHTML($bloque8, false, false, false, false, '');
 }
+// _______________________________________________________________--Nota de venta
 if($respuestaVenta["nota_venta"] != "") {
 $bloque8 = <<<EOF
 <h4>NOTA VENTA: $respuestaVenta[nota_venta]</h4>
 EOF;
 $pdf->writeHTML($bloque8, false, false, false, false, '');
 }
+// _______________________________________________________________--Nota de Produccion
 if($respuestaVenta["nota_produccion"] != "") {
 $bloque8 = <<<EOF
 <h4>NOTA PRODUCCION: $respuestaVenta[nota_produccion]</h4>
 EOF;
 $pdf->writeHTML($bloque8, false, false, false, false, '');
 }
-// ____________________________________________________________--laser
-
 
 // ---------------------------------------------------------
 //SALIDA DEL ARCHIVO 

@@ -49,6 +49,7 @@ class ModeloVentas{
 			productos, 
 			nota_venta, 
 			anticipo, 
+			adeudo,
 			impuesto, 
 			neto, 
 			total, 
@@ -66,6 +67,7 @@ class ModeloVentas{
 			router_grabado,
 			router_tallado,
 			router_diamante,
+			router_3d,
 			router_detalles,
 			serv_prod,
 			servicio_detalles,
@@ -82,6 +84,7 @@ class ModeloVentas{
 			:productos,
 			:nota_venta,
 			:anticipo,
+			:adeudo,
 			:impuesto,
 			:neto,
 			:total,
@@ -99,6 +102,7 @@ class ModeloVentas{
 			:router_grabado,
 			:router_tallado,
 			:router_diamante,
+			:router_3d,
 			:router_detalles,
 			:serv_prod,
 			:servicio_detalles,
@@ -117,6 +121,7 @@ class ModeloVentas{
 		$stmt->bindParam(":productos", $datos["productos"], PDO::PARAM_STR);
 		$stmt->bindParam(":nota_venta", $datos["nota_venta"], PDO::PARAM_STR);
 		$stmt->bindParam(":anticipo", $datos["anticipo"], PDO::PARAM_STR);
+		$stmt->bindParam(":adeudo", $datos["adeudo"], PDO::PARAM_STR);
 		$stmt->bindParam(":impuesto", $datos["impuesto"], PDO::PARAM_STR);
 		$stmt->bindParam(":neto", $datos["neto"], PDO::PARAM_STR);
 		$stmt->bindParam(":total", $datos["total"], PDO::PARAM_STR);
@@ -134,6 +139,7 @@ class ModeloVentas{
 		$stmt->bindParam(":router_grabado", $datos["router_grabado"], PDO::PARAM_INT);
 		$stmt->bindParam(":router_tallado", $datos["router_tallado"], PDO::PARAM_INT);
 		$stmt->bindParam(":router_diamante", $datos["router_diamante"], PDO::PARAM_INT);
+		$stmt->bindParam(":router_3d", $datos["router_3d"], PDO::PARAM_INT);
 		$stmt->bindParam(":router_detalles", $datos["router_detalles"], PDO::PARAM_STR);
 		$stmt->bindParam(":serv_prod", $datos["serv_prod"], PDO::PARAM_INT);
 		$stmt->bindParam(":servicio_detalles", $datos["servicio_detalles"], PDO::PARAM_STR);
@@ -173,7 +179,8 @@ class ModeloVentas{
 			id_vendedor, 
 			productos, 
 			nota_venta, 
-			anticipo, 
+			anticipo,
+			adeudo, 
 			impuesto, 
 			neto, 
 			total, 
@@ -191,6 +198,7 @@ class ModeloVentas{
 			router_grabado,
 			router_tallado,
 			router_diamante,
+			router_3d,
 			router_detalles,
 			serv_prod,
 			servicio_detalles,
@@ -207,6 +215,7 @@ class ModeloVentas{
 			:productos,
 			:nota_venta,
 			:anticipo,
+			:adeudo,
 			:impuesto,
 			:neto,
 			:total,
@@ -224,6 +233,7 @@ class ModeloVentas{
 			:router_grabado,
 			:router_tallado,
 			:router_diamante,
+			router_3d,
 			:router_detalles,
 			:serv_prod,
 			:servicio_detalles,
@@ -242,6 +252,7 @@ class ModeloVentas{
 		$stmt->bindParam(":productos", $datos["productos"], PDO::PARAM_STR);
 		$stmt->bindParam(":nota_venta", $datos["nota_venta"], PDO::PARAM_STR);
 		$stmt->bindParam(":anticipo", $datos["anticipo"], PDO::PARAM_STR);
+		$stmt->bindParam(":adeudo", $datos["adeudo"], PDO::PARAM_STR);
 		$stmt->bindParam(":impuesto", $datos["impuesto"], PDO::PARAM_STR);
 		$stmt->bindParam(":neto", $datos["neto"], PDO::PARAM_STR);
 		$stmt->bindParam(":total", $datos["total"], PDO::PARAM_STR);
@@ -259,6 +270,7 @@ class ModeloVentas{
 		$stmt->bindParam(":router_grabado", $datos["router_grabado"], PDO::PARAM_INT);
 		$stmt->bindParam(":router_tallado", $datos["router_tallado"], PDO::PARAM_INT);
 		$stmt->bindParam(":router_diamante", $datos["router_diamante"], PDO::PARAM_INT);
+		$stmt->bindParam(":router_3d", $datos["router_3d"], PDO::PARAM_INT);
 		$stmt->bindParam(":router_detalles", $datos["router_detalles"], PDO::PARAM_STR);
 		$stmt->bindParam(":serv_prod", $datos["serv_prod"], PDO::PARAM_INT);
 		$stmt->bindParam(":servicio_detalles", $datos["servicio_detalles"], PDO::PARAM_STR);
@@ -279,6 +291,38 @@ class ModeloVentas{
 		}
 
 		$stmt->close();
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	ACTUALIZAR CAMPO DE VENTA
+	tabla = tabla a actualizar (ventas, usuarios, etc etc)
+	item1 = campo de la tabla a actualizar
+	valor1 = valor a guardar en la tabla
+	item2 = campo de referencia para encontrar la coincidencia (ejemplo ID, VENTA etc)
+	valor2 = valor del campo de referencia ID = 10 USUARIO = juan etc etc.
+	=============================================*/
+
+	static public function mdlActualizarVenta($tabla, $item1, $valor1, $item2, $valor2){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
+
+		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
 		$stmt = null;
 
 	}

@@ -77,7 +77,8 @@ if($_SESSION["perfil"] == "Especial"){
            <th>Vendedor</th>
            <th>Forma de pago</th>
            <th>Neto</th>
-           <th>Total</th> 
+           <th>Total</th>
+           <th>Adeudo</th>
            <th>Fecha</th>
            <th>Fecha de entrega</th>
            <th>Descuento</th>
@@ -134,6 +135,8 @@ if($_SESSION["perfil"] == "Especial"){
 
                   <td>$ '.number_format($value["total"],2).'</td>
 
+                  <td>$ '.($value["adeudo"]).'</td>
+
                   <td>'.$value["fecha"].'</td>
 
                   <td>'.$value["fecha_entrega"].'</td>
@@ -145,14 +148,13 @@ if($_SESSION["perfil"] == "Especial"){
                     <div class="btn-group">
                         
                       <button class="btn btn-info btnImprimirFactura" codigoVenta="'.$value["codigo"].'">
-
                         <i class="fa fa-print"></i>
-
-                      </button>';
+                      </button>
+                      <button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id"].'"><i class="fa fa-eye"></i></button>';
 
                       if($_SESSION["perfil"] == "Administrador"){
 
-                      echo '<button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
+                      echo '<button class="btn btn-info btnRegistrarPago" idVenta="'.$value["id"].'"><i class="fa fa-dollar"></i></button>
 
                       <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>';
 

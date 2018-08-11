@@ -118,6 +118,7 @@ class ControladorVentas{
 						   "productos"=>$_POST["listaProductos"],
 						   "nota_venta"=>$_POST["nota_venta"],
 						   "anticipo"=>$_POST["anticipo"],
+						   "adeudo"=>$_POST["adeudo_"],
 						   "impuesto"=>$_POST["nuevoPrecioImpuesto"],
 						   "neto"=>$_POST["nuevoPrecioNeto"],
 						   "total"=>$_POST["totalVenta"],
@@ -135,6 +136,7 @@ class ControladorVentas{
 						   "router_grabado"=>$_POST["router_grabado"],
 						   "router_tallado"=>$_POST["router_tallado"],
 						   "router_diamante"=>$_POST["router_diamante"],
+						   "router_3d"=>$_POST["router_3d"],
 						   "router_detalles"=>$_POST["router_detalles"],
 						   "serv_prod"=>$_POST["serv_prod"],
 						   "servicio_detalles"=>$_POST["servicio_detalles"],
@@ -189,6 +191,50 @@ class ControladorVentas{
 	}
 
 	/*=============================================
+	REGISTRAR PAGO VENTA (actualizar venta en modelo)
+	=============================================*/
+	static public function ctrRegistrarPago(){
+
+		if(isset($_POST["nuevo_adeudo"])){
+
+			$tabla = "ventas";
+			$item1 = "adeudo";
+			$valor1 = $_POST["nuevo_adeudo"];
+
+			$item2 = "codigo";
+			$valor2 = $_POST["editarVenta"];
+
+			 var_dump($tabla, $item1, $valor1, $item2, $valor2);
+
+			$RegistroPago = ModeloVentas::mdlActualizarVenta($tabla, $item1, $valor1, $item2, $valor2);
+			
+			if($RegistroPago == "ok"){
+
+				echo'<script>
+
+				localStorage.removeItem("rango");
+
+				swal({
+					  type: "success",
+					  title: "El pago ha sido registrado correctamente",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar"
+					  }).then((result) => {
+								if (result.value) {
+
+								window.location = "ventas";
+
+								}
+							})
+
+				</script>';
+
+			}
+ 
+ 		}
+	}
+
+	/*=============================================
 	EDITAR VENTA
 	=============================================*/
 
@@ -239,9 +285,9 @@ class ControladorVentas{
 					$item = "id";
 					$valor = $value["id"];
 
-					var_dump($item);
-					var_dump($valor);
-					var_dump($tablaProductos);
+					// var_dump($item);
+					// var_dump($valor);
+					// var_dump($tablaProductos);
 
 					$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
 
@@ -336,6 +382,7 @@ class ControladorVentas{
 						   "productos"=>$_POST["listaProductos"],
 						   "nota_venta"=>$_POST["nota_venta"],
 						   "anticipo"=>$_POST["anticipo"],
+						   "adeudo"=>$_POST["adeudo_"],
 						   "impuesto"=>$_POST["nuevoPrecioImpuesto"],
 						   "neto"=>$_POST["nuevoPrecioNeto"],
 						   "total"=>$_POST["totalVenta"],
@@ -353,6 +400,7 @@ class ControladorVentas{
 						   "router_grabado"=>$_POST["router_grabado"],
 						   "router_tallado"=>$_POST["router_tallado"],
 						   "router_diamante"=>$_POST["router_diamante"],
+						   "router_3d"=>$_POST["router_3d"],
 						   "router_detalles"=>$_POST["router_detalles"],
 						   "serv_prod"=>$_POST["serv_prod"],
 						   "servicio_detalles"=>$_POST["servicio_detalles"],

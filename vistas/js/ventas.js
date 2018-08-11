@@ -244,6 +244,8 @@ $(".formularioVenta").on("click", "button.quitarProducto", function(){
 
 })
 
+
+
 /*=============================================
 AGREGANDO PRODUCTOS DESDE EL BOTÓN PARA DISPOSITIVOS
 =============================================*/
@@ -480,6 +482,21 @@ function sumarTotalPrecios(){
 
 }
 
+/*=============================================
+	REGISTRO DE PAGO 
+=============================================*/
+
+$("#registro_pago").change(function(){
+
+	var nuevoAdeudo = $("#adeudo_").val() - $("#registro_pago").val();
+	
+	$(nuevoAdeudo).number(true, 2);
+
+	$("#nuevo_adeudo").val(nuevoAdeudo);
+
+	 // alert(nuevoAdeudo);
+
+});
 
 /*=============================================
 FUNCIÓN AGREGAR IMPUESTO DESCUENTO Y ANTICIPO
@@ -510,14 +527,14 @@ function agregarImpuesto(){
 
 }
 
-
-	// validar Checks y Radios
+/*=============================================
+VALIDAR CHECKS Y RADIO 
+=============================================*/
 function validarChecks(){
 
 	// ENTREGA
 	if($("#ordinario").is(':checked')) 			{$("#entrega").val(0)}
-	if($("#dia_siguiente").is(':checked')) 		{$("#entrega").val(1)}
-	if($("#urgente").is(':checked')) 			{$("#entrega").val(2)}	
+	if($("#urgente").is(':checked')) 			{$("#entrega").val(1)}	
 	// ACABADO
 	if($("#bruto").is(':checked'))	  			{$("#acabado").val(0)}
 	if($("#limpio").is(':checked'))	  			{$("#acabado").val(1)}
@@ -532,6 +549,7 @@ function validarChecks(){
 	if($(".router_grabado_").prop("checked")) 	{$("#router_grabado").val(1)}else{$("#router_grabado").val(0)}
 	if($(".router_tallado_").prop("checked")) 	{$("#router_tallado").val(1)}else{$("#router_tallado").val(0)}
 	if($(".router_diamante_").prop("checked")) 	{$("#router_diamante").val(1)}else{$("#router_diamante").val(0)}
+	if($(".router_3d_").prop("checked")) 		{$("#router_3d").val(1)}else{$("router_3d").val(0)}
     // MATERIAL
 	if($("#el_cliente").is(':checked'))			{$("#material").val(0)}
 	if($("#la_empresa").is(':checked'))			{$("#material").val(1)}
@@ -544,7 +562,7 @@ function validarChecks(){
 }
 
 /*=============================================
-CUANDO CAMBIA EL IMPUESTO , DESCUENTO o anticipo
+CUANDO CAMBIA EL IMPUESTO , DESCUENTO ,ANTICIPO, O REGISTRO DE PAGO 
 =============================================*/
 
 $("#nuevoImpuestoVenta").change(function(){
@@ -624,7 +642,7 @@ $("#nuevoMetodoPago").change(function(){
       	// Listar método en la entrada
       	listarMetodos()
 
-	}else if(metodo == "TC" || metodo == "TD" ){
+	}else if(metodo == "TC" || metodo == "TD" || metodo == "TE"){
 
 		$(this).parent().parent().removeClass('col-xs-4');
 
@@ -788,6 +806,28 @@ $(".tablas").on("click", ".btnEditarVenta", function(){
 	window.location = "index.php?ruta=editar-venta&idVenta="+idVenta;
 
 
+})
+
+/*=============================================
+BOTON REGISTRAR PAGO DESDE LAS TABLAS
+=============================================*/
+$(".tablas").on("click", ".btnRegistrarPago", function(){
+
+	var idVenta = $(this).attr("idVenta");
+
+	window.location = "index.php?ruta=registrar-pago-venta&idVenta="+idVenta;	
+})
+
+/*=============================================
+BOTON REGISTRAR NUEVO PAGO   
+=============================================*/
+$(".nuevo_Pago").click(function(){  
+
+	// console.log("haber si asi si....");
+	
+	var idVenta = $(this).attr("idVenta");
+	// var nuevoAdeudo = $("adeudo").val() - $("registro_pago").val();
+    console.log(idVenta); 
 })
 
 

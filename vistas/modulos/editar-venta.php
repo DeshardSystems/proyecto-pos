@@ -211,8 +211,7 @@
                           <!-- <input name="radio" id="radio" type="radio" value="1" /></td>                          -->
                           <input readonly type="text" class="form-control" name="entrega_" id="entrega_" value="<?php 
                           if($venta["entrega"] == "0") {echo "ORDINARIO";}
-                          elseif ($venta["entrega"] == "1") {echo "DIA SIGUIENTE";}
-                          elseif ($venta["entrega"] == "2") {echo "URGENTE";}?>" > 
+                          elseif ($venta["entrega"] == "1") {echo "URGENTE";}?>" > 
                           <br>
                           </div> 
                         </td>                            
@@ -366,6 +365,7 @@
                 if($venta["router_grabado"] == "1") {echo '<h4>Grabado Router_</h4>';}
                 if($venta["router_tallado"] == "1") {echo '<h4>Tallado Router_</h4>';}
                 if($venta["router_diamante"] == "1") {echo '<h4>Diamante Router</h4><br>';}
+                if($venta["router_3d"] == "1") {echo '<h4>3d Router</h4><br>';}
                 if($venta["router_detalles"] != "") {echo '<label>'.$venta["router_detalles"].'</label><br>';}?>             
                 <hr>
 

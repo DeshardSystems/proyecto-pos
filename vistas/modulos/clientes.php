@@ -67,9 +67,9 @@ if($_SESSION["perfil"] == "Especial"){
            <th>Última compra</th>
            <th>Credito</th>
            <th>Adeudo</th>
-           <th>Ingreso al sistema</th>
+           <th>Dia Pago</th>
            <th>Acciones</th>
-
+           
          </tr> 
 
         </thead>
@@ -110,7 +110,7 @@ if($_SESSION["perfil"] == "Especial"){
 
                     <td>'.$value["adeudo"].'</td>
 
-                    <td>'.$value["fecha"].'</td>
+                    <td>'.$value["dia_pago"].'</td>
 
                     <td>
 
@@ -270,12 +270,26 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-credit-card"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="credito_" placeholder="Linea de Credito">
+                <input type="text" class="form-control input-lg" name="credito_" id="credito_" placeholder="Linea de Credito">
 
               </div>
 
             </div>
-  
+
+             <!-- ENTRADA PARA EL DIA DE PAGO -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
+
+                <input type="number" class="form-control input-lg" name="nuevoDiaPago" id="nuevoDiaPago" min = "1" max = "28" placeholder="Ingresar dia de Pago" required>
+
+              </div>
+
+            </div>
+
           </div>
 
         </div>
@@ -431,7 +445,20 @@ MODAL EDITAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-credit-card"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="credito_" placeholder="Linea de Credito" >
+                <input type="text" class="form-control input-lg" name="editar_credito" id="editar_credito" placeholder="Linea de Credito" >
+
+              </div>
+
+            </div>
+             <!-- ENTRADA PARA LA FECHA DE PAGOS -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
+
+                <input type="number" class="form-control input-lg" name="editarDiaPago" id="editarDiaPago" min = "1" max = "28" placeholder="Ingresar dia de Pago" required>
 
               </div>
 
