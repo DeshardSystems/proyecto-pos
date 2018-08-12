@@ -995,6 +995,8 @@ $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
   radioClass   : 'iradio_flat-green'
 })
 
+//al dar click en enviar
+
 $("#boton").click(function () {	 
 	validarChecks();	
 	$('.guardar').click();

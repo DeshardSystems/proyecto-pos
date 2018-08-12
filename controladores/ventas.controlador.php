@@ -118,7 +118,7 @@ class ControladorVentas{
 						   "productos"=>$_POST["listaProductos"],
 						   "nota_venta"=>$_POST["nota_venta"],
 						   "anticipo"=>$_POST["anticipo"],
-						   "adeudo"=>$_POST["adeudo_"],
+						   "adeudo"=>$_POST["restante"],
 						   "impuesto"=>$_POST["nuevoPrecioImpuesto"],
 						   "neto"=>$_POST["nuevoPrecioNeto"],
 						   "total"=>$_POST["totalVenta"],

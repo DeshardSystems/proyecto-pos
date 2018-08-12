@@ -170,8 +170,10 @@ class ControladorUsuarios{
 					           "perfil" => $_POST["nuevoPerfil"],
 					           "foto"=>$ruta);
 
+
 				$respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
-			
+
+
 				if($respuesta == "ok"){
 
 					echo '<script>

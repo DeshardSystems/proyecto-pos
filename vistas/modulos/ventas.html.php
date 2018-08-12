@@ -45,10 +45,10 @@
          <tr>
            
            <th style="width:10px">#</th>
-           <th>Código factura</th>
+           <th>Código</th>
            <th>Cliente</th>
            <th>Vendedor</th>
-           <th>Forma de pago</th>
+           <th>F. Pago</th>
            <th>Neto</th>
            <th>Total</th> 
            <th>Fecha</th>
