@@ -4,7 +4,7 @@
     
     <h1>
       
-      Registrar Pago Venta
+      Cambiar estado de la venta
     
     </h1>
 
@@ -12,7 +12,7 @@
       
       <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
       
-      <li class="active">Registrar Pago Venta</li>
+      <li class="active">Cambiar estado de la venta/li>
     
     </ol>
 
@@ -58,12 +58,6 @@
                     $cliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
 
                     $porcentajeImpuesto = $venta["impuesto"] * 100 / $venta["neto"] ;
-
-                    // Cargar valores actuales de caja total
-                    $item = "id";
-                    $valor = "1";
-
-                    $registro_caja = ControladorCaja::ctrMostrarRegistroCaja($item, $valor);
                 ?>
 
 
@@ -79,7 +73,7 @@
 
                     <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $vendedor["nombre"]; ?>" readonly>
 
-                    <input type="hidden" name="idVendedorCaja" value="<?php echo $vendedor["nombre"]; ?>">
+                    <input type="hidden" name="idVendedor" value="<?php echo $vendedor["id"]; ?>">
 
                   </div>
 
@@ -100,13 +94,6 @@
                   </div>
                 
                 </div>
-
-                <!-- traemos el monto actual de la caja para meterla a la variable post que hara el calculo -->
-                <input type="hidden" name="viejaCaja" id="viejaCaja" value="<?php echo $registro_caja["en_caja"]; ?>"> 
-                <input type="hidden" name="nuevaVenta" id="nuevaVenta" value="<?php echo $venta["codigo"]; ?>"> 
-                <input type="hidden" name="nota_venta" id="nota_venta" value="<?php echo $venta["nota_venta"]; ?>"> 
-                <input type="hidden" name="nuevaCaja" id="nuevaCaja"> 
-                <input type="hidden" name="anticipo" id="anticipo"> 
 
                 <!--=====================================
                 ENTRADA DEL CLIENTE
@@ -274,100 +261,37 @@
 
                 <label>Metodo de pago: .<?php echo $venta["metodo_pago"]; ?></label>
 
-                <input type="hidden" name="nuevoMetodoPago"  id="nuevoMetodoPago" value="<?php echo $venta["metodo_pago"]; ?>"> 
-
-
-
                 <br>
       
               </div>
           
               <!--=====================================
-              REGISTRAR NUEVO PAGO
+              REGISTRAR CAMBIO DE ESTADO
               ======================================-->
+              <div class="input-group" style="width: 100%">
 
-                <div class="col-xs-12 pull-left">
-                  
-                  <table class="table">
+                <select class="form-control" id="progreso_list" name="progreso_list" style="width: 50%;" required>
+                      <option value="">Actualizar Estado</option>
+                      <option value="1">Sin Archivo</option>
+                      <option value="2">Sin Material</option>
+                      <option value="3">Sin Anticipo</option>
+                      <option value="4">Sin Herramienta</option>
+                      <option value="5">Sin Aprobar</option>
+                      <option value="6">En Proceso</option>
+                      <option value="7">Terminado</option>
+                      <option value="8">Entregado</option>
+                      <option value="9">URGENTE</option>                                          
+                </select> 
 
-                    <thead>
+                <button type="submit" class="btn btn-primary nuevo_Estado" style="width: 50%;">Modificar Estado</button>
 
-                      <tr>
-                        <th>Anticipo</th>
-                        <th>Adeudo</th>
-                        <th>Pago</th> 
-                        <th>Registrar</th>   
-                      </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                      <tr>
-
-                         <td style="width: 25%">
-                          
-                          <div class="input-group">
-                         
-                            <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-
-                            <input type="text" class="form-control input-sm" id = "anticipoPago" name="anticipoPago" total="" placeholder="00000" readonly value="<?php echo $venta["anticipo"]; ?>"> 
-                     
-                          </div>
-
-                        </td>                      
-                      
-                        <td style="width: 25%">
-                          
-                          <div class="input-group">
-                         
-                            <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-
-                            <input type="text" class="form-control input-sm" id = "adeudo_" name="adeudo_" total="" placeholder="00000" readonly value="<?php echo $venta["adeudo"]; ?>"> 
-                     
-                          </div>
-
-                        </td>
-
-                         <td style="width: 25%">
-                          
-                          <div class="input-group">
-                         
-                            <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-
-                            <input type="text" class="form-control input-sm" id = "registro_pago" name="registro_pago" placeholder="0" required>                             
-                            <input type="hidden" name="nuevo_adeudo" id="nuevo_adeudo"> 
-                     
-                          </div>
-
-                        </td>
-
-                          <td style="width: 25%">
-
-                            <!-- <button type="submit" class="btn btn-primary pull-right">Guardar venta</button> -->
-
-                            <button type="submit" class="btn btn-primary nuevo_Pago">Registrar pago</button>
-              
-                          </td>
-
-                      </tr>
-
-                    </tbody>
-
-                  </table>
-
-                </div>
-
-                <!-- ________fin de registro nuevo pago______________--- -->
-            </div>
+              </div>
+              <!-- ________fin de registro nuevo pago______________--- -->
 
             <?php
 
-              $crearCaja = new ControladorCaja();
-              $crearCaja -> ctrCrearCajaVenta();
-
               $registrarPago = new ControladorVentas();
-              $registrarPago -> ctrRegistrarPago();
+              $registrarPago -> ctrCambiarEstado();
 
             ?>
 

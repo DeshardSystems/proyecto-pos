@@ -162,6 +162,7 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "crear-venta" ||
          $_GET["ruta"] == "editar-venta" ||
          $_GET["ruta"] == "registrar-pago-venta" ||
+         $_GET["ruta"] == "cambiar-estado-venta" ||
          $_GET["ruta"] == "caja" ||
          $_GET["ruta"] == "cuentas" ||
          $_GET["ruta"] == "reportes" ||

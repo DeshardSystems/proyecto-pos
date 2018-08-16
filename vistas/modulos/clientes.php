@@ -200,7 +200,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-key"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoDocumentoId" placeholder="Ingresar RFC" required>
+                <input type="text" class="form-control input-lg" name="nuevoDocumentoId" placeholder="Ingresar RFC">
 
               </div>
 
@@ -214,7 +214,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
 
-                <input type="email" class="form-control input-lg" name="nuevoEmail" placeholder="Ingresar email" required>
+                <input type="email" class="form-control input-lg" name="nuevoEmail" placeholder="Ingresar email">
 
               </div>
 
@@ -242,7 +242,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-map-marker"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar dirección" required>
+                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar dirección">
 
               </div>
 
@@ -284,7 +284,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
 
-                <input type="number" class="form-control input-lg" name="nuevoDiaPago" id="nuevoDiaPago" min = "1" max = "28" placeholder="Ingresar dia de Pago" required>
+                <input type="number" class="form-control input-lg" name="nuevoDiaPago" id="nuevoDiaPago" min = "1" max = "28" placeholder="Ingresar dia de Pago">
 
               </div>
 
@@ -361,7 +361,7 @@ MODAL EDITAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="editarCliente" id="editarCliente" required>
+                <input type="text" class="form-control input-lg" name="editarCliente" id="editarCliente">
                 <input type="hidden" id="idCliente" name="idCliente">
               </div>
 
@@ -375,7 +375,7 @@ MODAL EDITAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-key"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="editarDocumentoId" id="editarDocumentoId" required>
+                <input type="text" class="form-control input-lg" name="editarDocumentoId" id="editarDocumentoId" >
 
               </div>
 
@@ -389,7 +389,7 @@ MODAL EDITAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
 
-                <input type="email" class="form-control input-lg" name="editarEmail" id="editarEmail" required>
+                <input type="email" class="form-control input-lg" name="editarEmail" id="editarEmail" >
 
               </div>
 
@@ -417,7 +417,7 @@ MODAL EDITAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-map-marker"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="editarDireccion" id="editarDireccion"  required>
+                <input type="text" class="form-control input-lg" name="editarDireccion" id="editarDireccion"  >
 
               </div>
 
@@ -431,7 +431,7 @@ MODAL EDITAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="editarFechaNacimiento" id="editarFechaNacimiento"  data-inputmask="'alias': 'yyyy/mm/dd'" data-mask required>
+                <input type="text" class="form-control input-lg" name="editarFechaNacimiento" id="editarFechaNacimiento"  data-inputmask="'alias': 'yyyy/mm/dd'" data-mask >
 
               </div>
 
@@ -458,7 +458,7 @@ MODAL EDITAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
 
-                <input type="number" class="form-control input-lg" name="editarDiaPago" id="editarDiaPago" min = "1" max = "28" placeholder="Ingresar dia de Pago" required>
+                <input type="number" class="form-control input-lg" name="editarDiaPago" id="editarDiaPago" min = "1" max = "28" placeholder="Ingresar dia de Pago">
 
               </div>
 

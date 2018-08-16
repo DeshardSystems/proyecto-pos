@@ -113,7 +113,7 @@ class ModeloVentas{
 			:progreso
 		)");
 
-		var_dump($datos);
+		// var_dump($datos);
 
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
@@ -278,7 +278,7 @@ class ModeloVentas{
 		$stmt->bindParam(":material_detalles", $datos["material_detalles"], PDO::PARAM_STR);
 		$stmt->bindParam(":nota_produccion", $datos["nota_produccion"], PDO::PARAM_STR);
 		$stmt->bindParam(":responsable", $datos["responsable"], PDO::PARAM_INT);
-		$stmt->bindParam(":progreso", $datos["progreso"], PDO::PARAM_INT);
+		$stmt->bindParam(":progreso", $datos["progreso"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
 

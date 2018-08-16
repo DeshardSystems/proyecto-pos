@@ -24,7 +24,6 @@ AL DAR CLICK EN GUARDAR OPERACION
 $(".formularioCaja").on("click", ".generarCaja", function(){
 
 calcularCaja();
-
 	// $('.guardarCaja').click();
 });
 
@@ -53,6 +52,7 @@ function calcularCaja(){
 	}
 
 }
+
 
 
 

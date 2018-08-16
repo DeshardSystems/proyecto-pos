@@ -79,10 +79,11 @@ if($_SESSION["perfil"] == "Especial"){
            <th>Neto</th>
            <th>Total</th>
            <th>Adeudo</th>
+           <th>Descuento</th>
            <th>Fecha</th>
            <th>F.Entrega</th>
-           <th>Descuento</th>
-           <th>Acciones</th>
+           <th>Estado</th>
+           <th>Ejecutar_Acciones</th>
 
 
          </tr> 
@@ -135,32 +136,46 @@ if($_SESSION["perfil"] == "Especial"){
 
                   <td>$ '.number_format($value["total"],2).'</td>
 
-                  <td>$ '.($value["adeudo"]).'</td>
+                  <td>$ '.number_format($value["adeudo"],2).'</td>
+
+                  <td>'.number_format($value["descuento"],2).'</td>
 
                   <td>'.$value["fecha"].'</td>
 
-                  <td>'.$value["fecha_entrega"].'</td>
+                  <td>'.$value["fecha_entrega"].'</td>';
 
-                  <td>'.$value["descuento"].'</td>
+                      if($value["progreso"] == "1"){ echo'<td class="bg-aqua"> Sin Archivo </td>';}
+                  elseif($value["progreso"] == "2"){ echo'<td class="bg-red"> Sin Material </td>';}
+                  elseif($value["progreso"] == "3"){ echo'<td class="bg-aqua"> Sin Anticipo </td>';}
+                  elseif($value["progreso"] == "4"){ echo'<td class="bg-red"> Sin Herramienta </td>';}
+                  elseif($value["progreso"] == "5"){ echo'<td class="bg-aqua"> Sin Aprobar </td>';}
+                  elseif($value["progreso"] == "6"){ echo'<td class="bg-yellow"> En Proceso </td>';}
+                  elseif($value["progreso"] == "7"){ echo'<td class="bg-green"> Terminado </td>';}
+                  elseif($value["progreso"] == "8"){ echo'<td class="bg-green"> Entregado </td>';}
+                  elseif($value["progreso"] == "9"){ echo'<td class="bg-red"> URGENTE </td>';}
+                  else { echo'<td class="bg-red">Sin Definir</td>';}
+
+                  echo'
 
                   <td>
 
+
                     <div class="btn-group">
-                        
-                      <button class="btn btn-info btnImprimirFactura" codigoVenta="'.$value["codigo"].'">
-                        <i class="fa fa-print"></i>
+                      <button type="button" class="btn btn-info">Acciones</button>
+                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
                       </button>
-                      <button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id"].'"><i class="fa fa-eye"></i></button>';
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a class = "btnImprimirFactura" codigoVenta="'.$value["codigo"].'" href="#">Imprimir Venta</a></li>
+                        <li><a class = "btnEditarVenta" idVenta="'.$value["id"].'" href="#">Mostrar Venta</a></li>
+                        <li><a class = "btnActualizarEstado" idVenta="'.$value["id"].'" href="#">Cambiar Estado</a></li>
+                        <li><a class = "btnRegistrarPago" idVenta="'.$value["id"].'" href="#">Registrar Pago</a></li>
+                        <li><a class = "btnEliminarVenta" idVenta="'.$value["id"].'" href="#">Eliminar Venta</a></li>
+                      </ul>
+                    </div>
 
-                      if($_SESSION["perfil"] == "Administrador"){
-
-                      echo '<button class="btn btn-info btnRegistrarPago" idVenta="'.$value["id"].'"><i class="fa fa-dollar"></i></button>
-
-                      <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>';
-
-                      }
-
-                    echo '</div>  
+ 
 
                   </td>
 

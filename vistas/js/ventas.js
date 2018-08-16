@@ -482,21 +482,6 @@ function sumarTotalPrecios(){
 
 }
 
-/*=============================================
-	REGISTRO DE PAGO 
-=============================================*/
-
-$("#registro_pago").change(function(){
-
-	var nuevoAdeudo = $("#adeudo_").val() - $("#registro_pago").val();
-	
-	$(nuevoAdeudo).number(true, 2);
-
-	$("#nuevo_adeudo").val(nuevoAdeudo);
-
-	 // alert(nuevoAdeudo);
-
-});
 
 /*=============================================
 FUNCIÓN AGREGAR IMPUESTO DESCUENTO Y ANTICIPO
@@ -507,7 +492,7 @@ function agregarImpuesto(){
 	var impuesto = $("#nuevoImpuestoVenta").val();
 	var precioTotal = ($("#nuevoTotalVenta").attr("total") - $("#descuento").val()) ;
 	var precioImpuesto = Number(precioTotal * impuesto/100);
-	var anticipo = $("#anticipo").val();
+	var anticipo = $("#anticipoPago").val();
 
 	var totalConImpuesto = Number(precioImpuesto) + Number(precioTotal);
 		
@@ -577,7 +562,7 @@ $("#descuento").change(function(){
 
 });
 
-$("#anticipo").change(function(){
+$("#anticipoPago").change(function(){
 
 	agregarImpuesto();
 
@@ -738,6 +723,26 @@ $(".formularioVenta").on("change", "input#nuevoValorEfectivo", function(){
 })
 
 /*=============================================
+LISTAR MÉTODO DE PAGO
+=============================================*/
+
+function listarMetodos(){
+
+	var listaMetodos = "";
+
+	if($("#nuevoMetodoPago").val() == "Efectivo"){
+
+		$("#listaMetodoPago").val("Efectivo");
+
+	}else{
+
+		$("#listaMetodoPago").val($("#nuevoMetodoPago").val()+"-"+$("#nuevoCodigoTransaccion").val());
+
+	}
+
+}
+
+/*=============================================
 CAMBIO TRANSACCIÓN evento de cambio en forma de pago
 =============================================*/
 $(".formularioVenta").on("change", "input#nuevoCodigoTransaccion", function(){
@@ -773,27 +778,7 @@ function listarProductos(){
 	}
 
 	$("#listaProductos").val(JSON.stringify(listaProductos));
-	console.log("productos", listaProductos); 
-}
-
-/*=============================================
-LISTAR MÉTODO DE PAGO
-=============================================*/
-
-function listarMetodos(){
-
-	var listaMetodos = "";
-
-	if($("#nuevoMetodoPago").val() == "Efectivo"){
-
-		$("#listaMetodoPago").val("Efectivo");
-
-	}else{
-
-		$("#listaMetodoPago").val($("#nuevoMetodoPago").val()+"-"+$("#nuevoCodigoTransaccion").val());
-
-	}
-
+	// console.log("productos", listaProductos); 
 }
 
 /*=============================================
@@ -818,16 +803,15 @@ $(".tablas").on("click", ".btnRegistrarPago", function(){
 	window.location = "index.php?ruta=registrar-pago-venta&idVenta="+idVenta;	
 })
 
-/*=============================================
-BOTON REGISTRAR NUEVO PAGO   
-=============================================*/
-$(".nuevo_Pago").click(function(){  
 
-	// console.log("haber si asi si....");
-	
+/*=============================================
+BOTON CAMBIO DE ESTADO DESDE LAS TABLAS
+=============================================*/
+$(".tablas").on("click", ".btnActualizarEstado", function(){
+
 	var idVenta = $(this).attr("idVenta");
-	// var nuevoAdeudo = $("adeudo").val() - $("registro_pago").val();
-    console.log(idVenta); 
+
+	window.location = "index.php?ruta=cambiar-estado-venta&idVenta="+idVenta;	
 })
 
 
@@ -998,6 +982,68 @@ $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
 //al dar click en enviar
 
 $("#boton").click(function () {	 
-	validarChecks();	
+	
+	validarChecks();
+
 	$('.guardar').click();
 });
+
+
+/*=============================================
+CALCULAR PAGO A CAJA DESDE VENTA O REGISTRAR PAGO
+=============================================*/
+
+$("#anticipoPago").change(function () {
+
+
+	if($("#nuevoMetodoPago").val() == "Efectivo"){
+
+	var monto = Number($('#anticipoPago').val());
+
+	var nueva_caja =  Number(monto) + Number($('#viejaCaja').val());
+	$("#nuevaCaja").val(nueva_caja);
+	$("#anticipo").val(monto);
+
+	// alert($("#nuevaCaja").val());
+	}
+
+});
+
+
+/*=============================================
+	REGISTRO DE PAGO 
+=============================================*/
+
+$("#registro_pago").change(function(){
+
+	var nuevoAdeudo = $("#adeudo_").val() - $("#registro_pago").val();
+	
+	$(nuevoAdeudo).number(true, 2);
+
+	$("#nuevo_adeudo").val(nuevoAdeudo);
+
+ 	 // alert(nuevoAdeudo);
+ 	 //filtramos que el motodo de pago sea efectivo
+ 	 if($("#nuevoMetodoPago").val() == "Efectivo"){registroPagoCaja();} 
+
+});
+
+
+/*=============================================
+CALCULAR PAGO A CAJA DESDE REGISTRO DE PAGO O TABLA
+=============================================*/
+
+function registroPagoCaja(){
+
+	var monto = Number($('#registro_pago').val());
+
+	var nueva_caja =  Number(monto) + Number($('#viejaCaja').val());
+	$("#nuevaCaja").val(nueva_caja);
+	$("#anticipo").val(monto);
+
+	// alert($("#nuevaCaja").val());
+	// alert($("#anticipo").val());
+
+};
+
+

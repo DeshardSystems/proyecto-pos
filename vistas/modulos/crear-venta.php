@@ -76,6 +76,7 @@ if($_SESSION["perfil"] == "Especial"){
                     <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["nombre"]; ?>" readonly>
 
                     <input type="hidden" name="idVendedor" value="<?php echo $_SESSION["id"]; ?>">
+                    <input type="hidden" name="idVendedorCaja" value="<?php echo $_SESSION["nombre"]; ?>">
 
                   </div>
 
@@ -97,6 +98,12 @@ if($_SESSION["perfil"] == "Especial"){
                     $valor = null;
 
                     $ventas = ControladorVentas::ctrMostrarVentas($item, $valor);
+
+                    // Cargar valores actuales de caja total
+                    $item = "id";
+                    $valor = "1";
+
+                    $registro_caja = ControladorCaja::ctrMostrarRegistroCaja($item, $valor);
 
                     if(!$ventas){
 
@@ -120,7 +127,10 @@ if($_SESSION["perfil"] == "Especial"){
                     }
 
                     ?>
-                    
+                      <!-- traemos el monto actual de la caja para meterla a la variable post que hara el calculo -->
+                    <input type="hidden" name="viejaCaja" id="viejaCaja" value="<?php echo $registro_caja["en_caja"]; ?>"> 
+                    <input type="hidden" name="nuevaCaja" id="nuevaCaja"> 
+
                     
                   </div>
                 
@@ -136,7 +146,7 @@ if($_SESSION["perfil"] == "Especial"){
 
                     <span class="input-group-addon"><i class="fa fa-users"></i></span>
 
-                    <select class="form-control js-example-basic-single" style="width: 100%;" id="seleccionarCliente" name="seleccionarCliente" required>
+                    <select class="form-control js-example-basic-single" style="width: 80%;" id="seleccionarCliente" name="seleccionarCliente" required>
                     <option value="">Seleccionar cliente</option>
 
                     <?php
@@ -154,12 +164,15 @@ if($_SESSION["perfil"] == "Especial"){
 
                     ?>
                     
-                    <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button></span>
-                   </select>
+                    </select>
+
+                    <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button>    
                  
                   </div>
                 
-                </div>            
+                </div>
+
+                      
 
                 <!--=====================================
                 ENTRADA PARA AGREGAR PRODUCTO
@@ -348,7 +361,9 @@ if($_SESSION["perfil"] == "Especial"){
                   <td style="width: 33%"> 
                     <div class="input-group">
                     <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
-                    <input type="text" class="input-sm col-xs-12 center-block" border = "1" id="anticipo" name = "anticipo" placeholder="Anticipo" required>
+                    <input type="text" class="input-sm col-xs-12 center-block" border = "1" id="anticipoPago" name = "anticipoPago" placeholder="Anticipo" required>
+                    <input type="hidden" name="anticipo" id="anticipo"> 
+
                   </div>
                   </td>
                   <td style="width: 33%"> 
@@ -360,6 +375,8 @@ if($_SESSION["perfil"] == "Especial"){
                   <td style="width: 34%">
                     <input type="button" class="btn btn-primary center-block" id="boton" value="Guardar venta">                 
                     <button type="submit" class="btn btn-primary hidden guardar" id= "guardar" >Guardar venta</button>
+
+
                   </td>
 
                 </table>
@@ -431,7 +448,7 @@ if($_SESSION["perfil"] == "Especial"){
                     
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                    <select  class="js-example-basic-single form-control" style="width: 100%;" id="responsable" name="responsable" required>
+                    <select  class="js-example-basic-single form-control" style="width: 50%;" id="responsable" name="responsable" required>
                     <option value=""> asignado a: </option>
                       <?php
 
@@ -447,18 +464,32 @@ if($_SESSION["perfil"] == "Especial"){
                          }
                         ?>                      
                     </select>
+
+                    <select class="form-control" id="progreso_list" name="progreso_list" style="width: 50%;" required>
+                    <option value="">Estado Inicial</option>
+                    <option value="1">Sin Archivo</option>
+                    <option value="2">Sin Material</option>
+                    <option value="3">Sin Anticipo</option>
+                    <option value="4">Sin Herramienta</option>
+                    <option value="5">Sin Aprobar</option>
+                    <option value="6">En Proceso</option>
+                    <option value="7">Terminado</option>
+                    <option value="8">Entregado</option>
+                    <option value="9">URGENTE</option>                                          
+                    </select>  
+
                   </div>
+
                 </div>
-
-                <hr>
-
-                <input type="hidden" name="progreso" id="progreso ">  
 
             </div>
 
                 
           <?php
 
+            $crearCaja = new ControladorCaja();
+            $crearCaja -> ctrCrearCajaVenta();
+            
             $guardarVenta = new ControladorVentas();
             $guardarVenta -> ctrCrearVenta();
                       
@@ -521,7 +552,7 @@ MODAL AGREGAR CLIENTE
 
     <div class="modal-content">
 
-      <form role="form" method="post">
+      <form role="form" method="post" class="nuevoClienteVenta">
 
         <!--=====================================
         CABEZA DEL MODAL
@@ -551,7 +582,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-user"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoCliente" placeholder="Ingresar nombre" required>
+                <input type="text" class="form-control input-lg" name="nuevoCliente" id="nuevoClienteId" placeholder="Ingresar nombre" required>
 
               </div>
 
@@ -565,7 +596,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-key"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoDocumentoId" placeholder="Ingresar RFC" required>
+                <input type="text" class="form-control input-lg" name="nuevoDocumentoId" placeholder="Ingresar RFC">
 
               </div>
 
@@ -579,7 +610,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span> 
 
-                <input type="email" class="form-control input-lg" name="nuevoEmail" placeholder="Ingresar email" required>
+                <input type="email" class="form-control input-lg" name="nuevoEmail" placeholder="Ingresar email">
 
               </div>
 
@@ -607,7 +638,7 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-map-marker"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar dirección" required>
+                <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar dirección">
 
               </div>
 
@@ -621,12 +652,40 @@ MODAL AGREGAR CLIENTE
               
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaFechaNacimiento" placeholder="Ingresar fecha nacimiento" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask required>
+                <input type="text" class="form-control input-lg" name="nuevaFechaNacimiento" placeholder="Ingresar fecha nacimiento" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
 
               </div>
 
             </div>
-  
+
+             <!-- ENTRADA PARA LA LINEA DE CREDITO-->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-credit-card"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="credito_" id="credito_" placeholder="Linea de Credito">
+
+              </div>
+
+            </div>
+
+             <!-- ENTRADA PARA EL DIA DE PAGO -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span> 
+
+                <input type="number" class="form-control input-lg" name="nuevoDiaPago" id="nuevoDiaPago" min = "1" max = "28" placeholder="Ingresar dia de Pago">
+
+              </div>
+
+            </div>
+
           </div>
 
         </div>

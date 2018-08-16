@@ -32,31 +32,60 @@
 
 		}
 
+		///////////////////////////////////////////////////////////////categorias y productos
+
 		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial"){
 
-			echo '<li>
+			echo 
 
-				<a href="categorias">
+			'<li class="treeview">
 
-					<i class="fa fa-th"></i>
-					<span>Categorías</span>
-
-				</a>
-
-			</li>
-
-			<li>
-
-				<a href="productos">
+				<a href="#">
 
 					<i class="fa fa-product-hunt"></i>
+					
 					<span>Productos</span>
+					
+					<span class="pull-right-container">
+					
+						<i class="fa fa-angle-left pull-right"></i>
+
+					</span>
 
 				</a>
 
-			</li>';
+				<ul class="treeview-menu">
+					
+					<li>
+
+						<a href="categorias">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Categorías</span>
+
+						</a>
+
+					</li>
+
+					<li>
+
+						<a href="productos">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Productos</span>
+
+						</a>
+
+					</li>
+
+				    </ul>
+
+			</li>'
+
+			;
 
 		}
+         //////////////////////////////////////////////////////////////////////////////////
 
 		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor"){
 
@@ -113,7 +142,9 @@
 
 						</a>
 
-					</li>';
+					</li>
+
+					<li>';
 
 					if($_SESSION["perfil"] == "Administrador"){
 
@@ -141,7 +172,9 @@
 
 		//////_________________________________caja________________________________/////
 
-			echo '<li class="treeview">
+			echo 
+
+			'<li class="treeview">
 
 				<a href="#">
 
@@ -172,10 +205,10 @@
 
 					<li>
 
-						<a href="cuentas">
+						<a href="polizas">
 							
 							<i class="fa fa-circle-o"></i>
-							<span>Estados de cuanta</span>
+							<span>Polizas</span>
 
 						</a>
 
@@ -183,9 +216,9 @@
 
 				    </ul>
 
-			</li>';
+			</li>'
 
-
+			;
 
 		?>
 

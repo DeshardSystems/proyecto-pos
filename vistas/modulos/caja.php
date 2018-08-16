@@ -26,7 +26,7 @@
 
         <?php
 
-          // Cargar valores actuales de caja ingresos, egresos y en_caja id(1)
+          // Cargar valores actuales de caja total
 
           $item = "id";
           $valor = "1";

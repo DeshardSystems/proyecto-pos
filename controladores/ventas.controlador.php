@@ -117,7 +117,7 @@ class ControladorVentas{
 						   "id_vendedor"=>$_POST["idVendedor"],
 						   "productos"=>$_POST["listaProductos"],
 						   "nota_venta"=>$_POST["nota_venta"],
-						   "anticipo"=>$_POST["anticipo"],
+						   "anticipo"=>$_POST["anticipoPago"],
 						   "adeudo"=>$_POST["restante"],
 						   "impuesto"=>$_POST["nuevoPrecioImpuesto"],
 						   "neto"=>$_POST["nuevoPrecioNeto"],
@@ -144,11 +144,10 @@ class ControladorVentas{
 						   "material_detalles"=>$_POST["material_detalles"],
 						   "nota_produccion"=>$_POST["nota_produccion"],
 						   "responsable"=>$_POST["responsable"],
-						   "progreso"=>$_POST["progreso"],
+						   "progreso"=>$_POST["progreso_list"],
 						);
 
-
-				  // var_dump($datos);
+				   // var_dump($datos);
 
 
 			$respuesta = ModeloVentas::mdlIngresarVenta($tabla, $datos);
@@ -204,7 +203,7 @@ class ControladorVentas{
 			$item2 = "codigo";
 			$valor2 = $_POST["editarVenta"];
 
-			 var_dump($tabla, $item1, $valor1, $item2, $valor2);
+			 // var_dump($tabla, $item1, $valor1, $item2, $valor2);
 
 			$RegistroPago = ModeloVentas::mdlActualizarVenta($tabla, $item1, $valor1, $item2, $valor2);
 			
@@ -217,6 +216,51 @@ class ControladorVentas{
 				swal({
 					  type: "success",
 					  title: "El pago ha sido registrado correctamente",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar"
+					  }).then((result) => {
+								if (result.value) {
+
+								window.location = "ventas";
+
+								}
+							})
+
+				</script>';
+
+			}
+ 
+ 		}
+	}
+
+
+	/*=============================================
+	REGISTRAR PAGO VENTA (actualizar venta en modelo)
+	=============================================*/
+	static public function ctrCambiarEstado(){
+
+		if(isset($_POST["progreso_list"])){
+
+			$tabla = "ventas";
+			$item1 = "progreso";
+			$valor1 = $_POST["progreso_list"];
+
+			$item2 = "codigo";
+			$valor2 = $_POST["editarVenta"];
+
+			 // var_dump($tabla, $item1, $valor1, $item2, $valor2);
+
+			$RegistroPago = ModeloVentas::mdlActualizarVenta($tabla, $item1, $valor1, $item2, $valor2);
+			
+			if($RegistroPago == "ok"){
+
+				echo'<script>
+
+				localStorage.removeItem("rango");
+
+				swal({
+					  type: "success",
+					  title: "Estado Actualizado!!!",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then((result) => {
@@ -381,7 +425,7 @@ class ControladorVentas{
 						   "id_vendedor"=>$_POST["idVendedor"],
 						   "productos"=>$_POST["listaProductos"],
 						   "nota_venta"=>$_POST["nota_venta"],
-						   "anticipo"=>$_POST["anticipo"],
+						   "anticipo"=>$_POST["anticipoPago"],
 						   "adeudo"=>$_POST["adeudo_"],
 						   "impuesto"=>$_POST["nuevoPrecioImpuesto"],
 						   "neto"=>$_POST["nuevoPrecioNeto"],
@@ -408,7 +452,7 @@ class ControladorVentas{
 						   "material_detalles"=>$_POST["material_detalles"],
 						   "nota_produccion"=>$_POST["nota_produccion"],
 						   "responsable"=>$_POST["responsable"],
-						   "progreso"=>$_POST["progreso"],
+						   "progreso"=>$_POST["progreso_list"],
 						);
 
 
